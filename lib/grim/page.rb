@@ -44,8 +44,9 @@ module Grim
     #
     # Returns a String.
     #
-    def text
-      `#{["pdftotext", "-enc", "UTF-8", "-f", @number, "-l", @number, Shellwords.escape(@pdf.path), "-"].join(' ')}`
+    def text(options={})
+      pdftotext_path = options.fetch(:pdftotext_path, "pdftotext")
+      `#{[pdftotext_path, "-enc", "UTF-8", "-f", @number, "-l", @number, Shellwords.escape(@pdf.path), "-"].join(' ')}`
     end
   end
 end
